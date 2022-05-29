@@ -1,0 +1,288 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1e5b7439e9ba345b61542cc99c657a, type: 3}
+  m_Name: AudioContainer
+  m_EditorClassIdentifier: 
+  audioItems:
+  - name: TheCity_0
+    audioClip: {fileID: 8300000, guid: dca45f0bfc28fe443908295b6b0e6ff0, type: 3}
+    initialVolume: 1
+    adjustedVolume: 1.0006827
+    audioEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: activate
+    audioClip: {fileID: 8300000, guid: 2b42b428ee1c22a4fac3ba1f8359e3f4, type: 3}
+    initialVolume: 0.286
+    adjustedVolume: 0
+    audioEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.032440186
+        value: -0.025482178
+        inSlope: -0.019194378
+        outSlope: -0.019194378
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.28218532
+      - serializedVersion: 3
+        time: 0.47422248
+        value: 0.9681672
+        inSlope: 0.020800104
+        outSlope: 0.020800104
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9793091
+        value: -0.014152527
+        inSlope: -0
+        outSlope: -0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.26494193
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pitch: 1.324
+    audioSource: {fileID: 0}
+  - name: enable
+    audioClip: {fileID: 8300000, guid: fb3f93e12b4bf5e4ca3d911ce8019f43, type: 3}
+    initialVolume: 0.333
+    adjustedVolume: 0
+    audioEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.10769869
+        value: -0.05416237
+        inSlope: -0.054245286
+        outSlope: -0.054245286
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.18834214
+      - serializedVersion: 3
+        time: 0.38179237
+        value: 0.95701575
+        inSlope: 0.052643266
+        outSlope: 0.052643266
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6856877
+        value: -0.076143235
+        inSlope: -0.05451847
+        outSlope: -0.05451847
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.87757015
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pitch: 0.712
+    audioSource: {fileID: 0}
+  - name: fox_0
+    audioClip: {fileID: 8300000, guid: 6968dbaa08dcca345836dd58ea75b85f, type: 3}
+    initialVolume: 0.095
+    adjustedVolume: 0
+    audioEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.015995804
+        value: -0.020551622
+        inSlope: -0.09339812
+        outSlope: -0.09339812
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.22323078
+      - serializedVersion: 3
+        time: 0.3498091
+        value: 0.66186637
+        inSlope: 2.6893265
+        outSlope: 2.6893265
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.8888855
+        value: -0.024196625
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pitch: 0.614
+    audioSource: {fileID: 0}
+  - name: scan_0
+    audioClip: {fileID: 8300000, guid: 9ffad019974ba8948b457188c8c0242d, type: 3}
+    initialVolume: 2
+    adjustedVolume: 0
+    audioEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.034692653
+        value: -0.037944883
+        inSlope: -0.13697225
+        outSlope: -0.13697225
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.12994213
+      - serializedVersion: 3
+        time: 0.5192392
+        value: 0.989812
+        inSlope: -0.108952925
+        outSlope: -0.108952925
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.18495786
+      - serializedVersion: 3
+        time: 0.98775613
+        value: -0.02599374
+        inSlope: -0.3680943
+        outSlope: -0.3680943
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.21152562
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: base_0
+    audioClip: {fileID: 8300000, guid: ad9b5a1ee9ed1504daa0a8906e2e3c7b, type: 3}
+    initialVolume: 1.2
+    adjustedVolume: 0
+    audioEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.043478258
+        value: -0.056603774
+        inSlope: -0.054245286
+        outSlope: -0.054245286
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.18834214
+      - serializedVersion: 3
+        time: 0.32293922
+        value: 0.98245215
+        inSlope: 0.052643266
+        outSlope: 0.052643266
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6929286
+        value: 0.20533295
+        inSlope: -2.5436642
+        outSlope: -2.5436642
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.98341143
+        value: -0.033018652
+        inSlope: -0.05451847
+        outSlope: -0.05451847
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.87757015
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pitch: 1
+    audioSource: {fileID: 0}
+  - name: base_1
+    audioClip: {fileID: 8300000, guid: 5bbac6f01daf57a4e9d6c62471e77b12, type: 3}
+    initialVolume: 0.272
+    adjustedVolume: 0
+    audioEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.04571367
+        value: -0.021417007
+        inSlope: -0.054245286
+        outSlope: -0.054245286
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.18834214
+      - serializedVersion: 3
+        time: 0.28006238
+        value: 0.9874481
+        inSlope: 0.052643266
+        outSlope: 0.052643266
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6452309
+        value: -0.040892188
+        inSlope: -0.37283385
+        outSlope: -0.37283385
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.3525852
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pitch: 0.629
+    audioSource: {fileID: 0}
