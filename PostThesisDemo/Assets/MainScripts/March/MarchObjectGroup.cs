@@ -223,18 +223,11 @@ public partial class MarchManager
             disableAutoEntropyReduce = false;
             OnTogglePlayerInteraction?.Invoke(false);
         }
-
-
         //StatusUpdate
         public void MarchCompletionUpdate()
         {
-
             if (marchMode != MarchMode.mainInteraction) 
-            {
                 return;
-            }
-
-
             hasAllObjectsInPosition = true;
             int amountHasBeenActivated = 0;
             for (int i = 0; i < marchingTransformGroup.childCount; i++)
@@ -290,7 +283,6 @@ public partial class MarchManager
                 OnFormationComplete?.Invoke(this);
                 if (completeSound != null)
                     OnCompletionSound?.Invoke(completeSound, staticGroupBound.center, AudioRolloffMode.Linear, 1f, 3);
-
             }
         }
         private void Tutorial() 
@@ -368,7 +360,6 @@ public partial class MarchManager
                             hasBeenShutDown = true;
                             instance.StartCoroutine(CombineMeshCountdown(5f));
                         }
-
                         break;
                 }
             }
@@ -514,6 +505,42 @@ public partial class MarchManager
                 }
             }
         }
+        void InvokeAnimation(MarchObject currentObj, Vector3 position, float radius)
+        {
+            float distanceToPlayer = Vector3.Distance(position, currentObj.staticObject.transform.position);
+            if (distanceToPlayer < radius &&
+           !currentObj.hasBeenAffected &&
+           !currentObj.isInAnimation)
+            {
+                currentObj.hasBeenAffected = true;
+                if (currentObj.defaultUpdateAnimation == null)
+                {
+                    currentObj.defaultUpdateAnimation = instance.StartCoroutine(currentObj.InvokeTransformUpdate(2f, false));
+                }
+                else
+                {
+                    instance.StopCoroutine(currentObj.defaultUpdateAnimation);
+                    currentObj.defaultUpdateAnimation = instance.StartCoroutine(currentObj.InvokeTransformUpdate(2f, false));
+                }
+
+            }
+            else if (distanceToPlayer >= radius &&
+                currentObj.hasBeenAffected &&
+                !currentObj.isInAnimation)
+            {
+                currentObj.hasBeenAffected = false;
+                if (currentObj.defaultUpdateAnimation == null)
+                {
+                    currentObj.defaultUpdateAnimation = instance.StartCoroutine(currentObj.InvokeTransformUpdate(2f, true));
+                }
+                else
+                {
+                    instance.StopCoroutine(currentObj.defaultUpdateAnimation);
+                    currentObj.defaultUpdateAnimation = instance.StartCoroutine(currentObj.InvokeTransformUpdate(2f, true));
+                }
+
+            }
+        }
 
         //Completion
         public void IndicateCompletionThreshold(bool state)
@@ -585,7 +612,6 @@ public partial class MarchManager
                 meshForUniqueMaterial.CombineMeshes(uniqueMaterialCombiners.ToArray(), true);
                 submeshes[i] = meshForUniqueMaterial;
             }
-            //print(submeshes.Length);
             CombineInstance[] finalCombiners = new CombineInstance[submeshes.Length];
             for (int i = 0; i < submeshes.Length; i++)
             {
@@ -597,6 +623,7 @@ public partial class MarchManager
             finalMesh.RecalculateBounds();
             finalMesh.RecalculateNormals();
             finalMesh.RecalculateTangents();
+            //finalMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
             marchingTransformGroup.position = oldPosition;
             marchingTransformGroup.rotation = oldRotation;
             marchingTransformGroup.localScale = oldScale;
@@ -611,43 +638,5 @@ public partial class MarchManager
             parentMeshFilter.mesh = finalMesh;
             jobActivate = false;
         }
-        void InvokeAnimation(MarchObject currentObj, Vector3 position, float radius) 
-        {
-            float distanceToPlayer = Vector3.Distance(position, currentObj.staticObject.transform.position);
-            if (distanceToPlayer < radius &&
-           !currentObj.hasBeenAffected &&
-           !currentObj.isInAnimation)
-            {
-                currentObj.hasBeenAffected = true;
-                if (currentObj.defaultUpdateAnimation == null)
-                {
-                    currentObj.defaultUpdateAnimation = instance.StartCoroutine(currentObj.InvokeTransformUpdate(2f, false));
-                }
-                else
-                {
-                    instance.StopCoroutine(currentObj.defaultUpdateAnimation);
-                    currentObj.defaultUpdateAnimation = instance.StartCoroutine(currentObj.InvokeTransformUpdate(2f, false));
-                }
-
-            }
-            else if (distanceToPlayer >= radius &&
-                currentObj.hasBeenAffected &&
-                !currentObj.isInAnimation)
-            {
-                currentObj.hasBeenAffected = false;
-                if (currentObj.defaultUpdateAnimation == null)
-                {
-                    currentObj.defaultUpdateAnimation = instance.StartCoroutine(currentObj.InvokeTransformUpdate(2f, true));
-                }
-                else
-                {
-                    instance.StopCoroutine(currentObj.defaultUpdateAnimation);
-                    currentObj.defaultUpdateAnimation = instance.StartCoroutine(currentObj.InvokeTransformUpdate(2f, true));
-                }
-
-            }
-        }
-        
-      
     }
 }

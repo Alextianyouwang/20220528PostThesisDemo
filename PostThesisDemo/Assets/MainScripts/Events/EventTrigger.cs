@@ -1,29 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
-
 public class EventTrigger : MonoBehaviour
 {
-    public float triggerRadius;
     public enum Mode { circleRange, boxRange };
     public Mode triggerMode;
     public enum AlignAxis {X,Y,Z};
     public AlignAxis alignAxis;
     public enum ExitCondition { Null,One, Zero };
     public ExitCondition exitCondition;
+
+    public float triggerRadius;
     public Vector3 triggerDimentions;
-    private bool hasBeenTriggered;
     public Color triggerIndicatorColor = Color.red;
-    private PlayerInteraction player;
+
     public string eventName;
     public float eventLastingTime;
-    public bool oneTimeActivation = true;
     public float lerpPerc;
-    
+    private bool hasBeenTriggered;
+    public bool oneTimeActivation = true;
+
     private Coroutine rangeCheckCo;
     private BoxCollider triggerCollider;
-  
+    private PlayerInteraction player;
+
     public static event Action<string,float,bool> OnEventCalled;
     public static event Action<string> OnEventEnd;
 
@@ -38,7 +38,6 @@ public class EventTrigger : MonoBehaviour
             triggerCollider.isTrigger = true;
         }
     }
-    
     void Update()
     {
         if (triggerMode == Mode.circleRange)
@@ -51,7 +50,6 @@ public class EventTrigger : MonoBehaviour
             }
         }
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = triggerIndicatorColor;
@@ -64,7 +62,6 @@ public class EventTrigger : MonoBehaviour
             Gizmos.DrawWireCube(transform.position + triggerDimentions / 2, triggerDimentions);
         }
     }
-
     IEnumerator RangeChecker() 
     {
         float distanceRef = 1;
@@ -95,7 +92,6 @@ public class EventTrigger : MonoBehaviour
             rangeCheckCo = StartCoroutine(RangeChecker());
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.tag.Equals("Player")) 

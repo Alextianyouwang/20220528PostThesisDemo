@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class Utility
 {
-
     public static bool IsVisibleFromCamera(Camera cam, GameObject target,bool hardTest) 
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
@@ -12,7 +8,6 @@ public class Utility
         {
             if (p.GetDistanceToPoint(target.transform.position)<0) 
             {
-
                 return false;
             }
         }
@@ -40,7 +35,6 @@ public class Utility
         {
             if (p.GetDistanceToPoint(pos) < 0)
             {
-
                 return false;
             }
         }

@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Threading.Tasks;
 
-public class EventContainer
+// A Container Class Responsible for Immediate Scene Actions.
+public static class EventContainer
 {
-    private EventExecuter caller;
-    public Event currentEvent;
-    public List<Event> eventList = new List<Event>();
     public static event Action OnPassiveActivateInteraction;
     public static event Action<float, float, float> OnChangePlayerAffectRadius;
     public static event Action<bool> OnDisableEntropyReduce;
@@ -16,95 +15,146 @@ public class EventContainer
     public static event Action OnSphereLerp;
     public static event Action OnSphereLerpPrepare;
     public static event Action OnSphereLerpExit;
-    public EventContainer(EventExecuter _eventCaller) 
+
+    public static List<MyEvent> GetAllEvents()
     {
-        caller = _eventCaller;
-        eventList = GetAllEvents();
-    }
-    public List<Event>  GetAllEvents()
-    {
-        List<Event> allEvents = new List<Event>{
-            new Event("AfterAssembleNarwhal",new Action[]{ScanAndUnveilObject_Fast},null,new Action[]{ReadyToFreeMove}),
-            new Event("SphereLerp",new Action[]{SphereLerpPrepare},SphereLerp,null),
-            new Event("EndDemo",new Action[]{ScanAndUnveilObject_Fast,SphereLerpExit},null,new Action[]{ReadyToFreeMove}),
-        };
+        List<MyEvent> allEvents = new List<MyEvent>{
+            new MyEvent(
+                "AfterAssembleNarwhal",
+                new IAction[]{new ToggleEntropyReduce(true), new ChangePlayerEffectRadius(0f,400f,12f), new PassiveActivateInteraction()},
+                null,
+                new IAction[]{new ToggleEntropyReduce(false), new ChangePlayerEffectRadius(20f, 50f, 1.5f), new TogglePlayerInteraction(false)}),
+
+            new MyEvent(
+                "SphereLerp",
+                new IAction[]{new SphereLerpPrepare()},
+                new SphereLerp(),
+                null),
+
+            new MyEvent(
+                "EndDemo",
+                new IAction[]{new ToggleEntropyReduce(true), new ChangePlayerEffectRadius(0f,1000f,12f), new PassiveActivateInteraction(),new SphereLerpExit()},
+                null,
+                new IAction[]{ new ToggleEntropyReduce(false), new ChangePlayerEffectRadius(20f, 50f, 1.5f), new TogglePlayerInteraction(false)}
+                )
+       };
         return allEvents;
     }
-    public void SphereLerp() 
+    private class ChangePlayerEffectRadius : IAction
     {
-        OnSphereLerp?.Invoke();
+        float innerRadius, outerRadius, lastingTime;
+        public ChangePlayerEffectRadius(float _inner, float _outer, float _time)
+        {
+            innerRadius = _inner;
+            outerRadius = _outer;
+            lastingTime = _time;
+        }
+        public void Invoke() => OnChangePlayerAffectRadius.Invoke(innerRadius, outerRadius, lastingTime);
     }
-    public void SphereLerpPrepare() 
+    private class ToggleEntropyReduce : IAction
     {
-        OnSphereLerpPrepare?.Invoke();
+        bool state;
+        public ToggleEntropyReduce(bool _state)
+        {
+            state = _state;
+        }
+        public void Invoke() => OnDisableEntropyReduce.Invoke(state);
     }
-    public void SphereLerpExit() 
+    private class TogglePlayerInteraction : IAction
     {
-        OnSphereLerpExit?.Invoke();
+        bool state;
+        public TogglePlayerInteraction(bool _state)
+        {
+            state = _state;
+        }
+        public void Invoke() => OnTogglePlayerInteraction.Invoke(state);
     }
-    public void ScanAndUnveilObject_Fast()
+    private class PassiveActivateInteraction : IAction
     {
-        OnDisableEntropyReduce?.Invoke(true);
-        OnChangePlayerAffectRadius?.Invoke(0f, 600f, 10f);
-        OnPassiveActivateInteraction?.Invoke();
+        public PassiveActivateInteraction() { }
+        public void Invoke() => OnPassiveActivateInteraction.Invoke();
     }
-    public void ReadyToFreeMove()
+    private class SphereLerpPrepare : IAction
     {
-        OnChangePlayerAffectRadius?.Invoke(20f, 50f, 1.5f);
-        OnDisableEntropyReduce?.Invoke(false);
-        OnTogglePlayerInteraction?.Invoke(false);
+        public SphereLerpPrepare() { }
+        public void Invoke() => OnSphereLerpPrepare.Invoke();
     }
-    public void InitiateSelectedEvent(string name, float autoTriggerTimer, bool oneTimeActivation) 
-    { 
-        Event selectedEvent = eventList.Find(x => x.name == name);
+    private class SphereLerp : IAction
+    {
+        public SphereLerp() { }
+        public void Invoke() => OnSphereLerp.Invoke();
+    }
+    private class SphereLerpExit : IAction
+    {
+        public SphereLerpExit() { }
+        public void Invoke() => OnSphereLerpExit.Invoke();
+    }
+}
+// A Utility Class that Manage The Execution and Termination of Events.
+public static class MyEventsDispatcher 
+{
+    public static event Action<string> OnEnterEvent;
+    public static event Action<string> OnExitEvent;
+
+    public static List<MyEvent> eventList = new List<MyEvent>();
+    public static MyEvent currentEvent;
+
+    public static MyEvent InitiateSelectedEvent(string name, float autoTriggerTimer, bool oneTimeActivation)
+    {
+        OnEnterEvent?.Invoke(name);
+        MyEvent selectedEvent = eventList.Find(x => x.name == name);
         if (selectedEvent == null || selectedEvent.hasActivated)
-            return;
+            return null;
         currentEvent = selectedEvent;
         selectedEvent.isInprogress = true;
-        caller.StartCoroutine(LoadCurrentEventAction(selectedEvent, autoTriggerTimer));
+        LoadCurrentEventAction(selectedEvent, autoTriggerTimer);
         if (oneTimeActivation)
             selectedEvent.hasActivated = true;
+        return selectedEvent;
     }
-    public void EndSelectedEvent(string name) 
+    public static void EndSelectedEvent(string name)
     {
-        Event selectedEvent = eventList.Find(x => x.name == name);
+        MyEvent selectedEvent = eventList.Find(x => x.name == name);
         selectedEvent.isInprogress = false;
+ 
     }
-    public IEnumerator LoadCurrentEventAction(Event currentEvent, float waitTime)
+    public static async void LoadCurrentEventAction(MyEvent currentEvent, float waitTime)
     {
         float time = 0;
-        if (currentEvent.StartEventActions != null) 
-            foreach (Action a in currentEvent.StartEventActions)
-                a?.Invoke();
-        if (waitTime != 0) 
-            while (waitTime > 60? currentEvent.isInprogress: currentEvent.isInprogress && time < waitTime)
+        if (currentEvent.StartEventActions != null)
+            foreach (IAction a in currentEvent.StartEventActions)
+                a.Invoke();
+        if (waitTime != 0)
+            while (waitTime > 60 ? currentEvent.isInprogress : currentEvent.isInprogress && time < waitTime)
             {
                 time += Time.deltaTime;
                 currentEvent.OnEventAction?.Invoke();
-                yield return null;
+                await Task.Yield();
             }
-        if (currentEvent.EndEventActions != null) 
-            foreach (Action a in currentEvent.EndEventActions)
-                a?.Invoke();
+        if (currentEvent.EndEventActions != null)
+            foreach (IAction a in currentEvent.EndEventActions)
+                a.Invoke();
         currentEvent.isInprogress = false;
         currentEvent.hasEnd = true;
-    }
-    public class Event
-    {
-        public string name;
-        public Action[] StartEventActions;
-        public Action OnEventAction;
-        public Action[] EndEventActions;
-        public bool hasActivated = false;
-        public bool isInprogress = false;
-        public bool hasEnd = false;
-        public Event(string _name,Action[] _StartEventAction,Action _OnEventAction,Action[] _EndEventAction) 
-        {
-            name = _name;
-            StartEventActions = _StartEventAction;
-            OnEventAction = _OnEventAction;
-            EndEventActions = _EndEventAction;
-        }
-
+        OnExitEvent?.Invoke(currentEvent.name);
     }
 }
+// Individual Event.
+public class MyEvent
+{
+    public string name;
+    public IAction[] StartEventActions;
+    public IAction OnEventAction;
+    public IAction[] EndEventActions;
+    public bool hasActivated = false;
+    public bool isInprogress = false;
+    public bool hasEnd = false;
+    public MyEvent(string _name, IAction[] _StartEventAction, IAction _OnEventAction, IAction[] _EndEventAction)
+    {
+        name = _name;
+        StartEventActions = _StartEventAction;
+        OnEventAction = _OnEventAction;
+        EndEventActions = _EndEventAction;
+    }
+}
+public interface IAction{ public void Invoke(); }

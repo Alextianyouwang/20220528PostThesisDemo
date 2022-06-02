@@ -14,29 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioItems:
   - name: TheCity_0
-    audioClip: {fileID: 8300000, guid: dca45f0bfc28fe443908295b6b0e6ff0, type: 3}
+    audioClip: {fileID: 8300000, guid: 1debf80671e34ad4c85f713e3deb5739, type: 3}
     initialVolume: 1
-    adjustedVolume: 1.0006827
+    adjustedVolume: 1.0010664
     audioEaseCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.27406374
+        outSlope: -0.27406374
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.037254244
+        value: 0.98978996
+        inSlope: -0.0033001844
+        outSlope: -0.0033001844
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.4352938
+        outWeight: 0.92186606
+      - serializedVersion: 3
+        time: 0.13458252
+        value: 0.9417655
+        inSlope: -0.34157065
+        outSlope: -0.34157065
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.08088482
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.067290656
+        outSlope: 0.067290656
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

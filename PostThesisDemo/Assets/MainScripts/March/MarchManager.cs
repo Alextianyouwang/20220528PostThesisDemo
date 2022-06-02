@@ -13,7 +13,6 @@ public partial class MarchManager : MonoBehaviour
     public PlayerInteraction playerControl;
     public Transform grandMarchingTransform, grandStaticTransform;
     public List<MarchObjectGroup> marchObjectGroups = new List<MarchObjectGroup>();
-    private EventExecuter eveExe;
 
     public static event Action<Material> OnNewMaterialAdd;
     public static event Action<Vector3, float, float, float,bool> OnRippleEffect;
@@ -203,15 +202,10 @@ public partial class MarchManager : MonoBehaviour
     }
     private void Awake()
     {
-        eveExe = FindObjectOfType<EventExecuter>();
         if (instance == null)
-        {
             instance = this;
-        }
         else 
-        {
             Destroy(instance);
-        }
         if (grandMarchingTransform.childCount !=grandStaticTransform.childCount) 
         {
             Debug.LogWarning("Transform Group Count not Equal.");
@@ -229,10 +223,8 @@ public partial class MarchManager : MonoBehaviour
                         ));
             }
         }
-        eveExe.Initialze();
+        FindObjectOfType<EventExecuter>()?.Initialze();
         AllocateNativeLists();
-  
-     
     }
     private void OnDestroy()
     {
@@ -480,6 +472,20 @@ public partial class MarchManager : MonoBehaviour
         {
             marchObjectGroups[i].Initialize();
         }
+        GetAllObjectCount();
+    }
+    void GetAllObjectCount() 
+    {
+        int num = 0;
+        for (int i = 0; i < marchObjectGroups.Count; i++)
+        {
+            int objectsCount = marchObjectGroups[i].marchObjects.Count;
+            for (int j = 0; j < objectsCount; j++) 
+            {
+                num += 1;
+            }
+        }
+        print("Total marching objects:" + num);
     }
     private void Update()
     {
@@ -507,7 +513,6 @@ public partial class MarchManager : MonoBehaviour
                 Gizmos.color = m.readyToComplete ? Color.green : Color.red;
                 Gizmos.DrawWireSphere(m.staticGroupBound.center, m.activationRadius);
             }
-            
         }
     }
     void ToggleActivation(bool state) 

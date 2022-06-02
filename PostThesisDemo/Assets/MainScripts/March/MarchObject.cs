@@ -148,18 +148,15 @@ public partial class MarchManager
         {
             Material material = marchObject.GetComponent<MeshRenderer>().material;
             material.SetColor("OL_Color", warnning ? instance.readyOutlineColor : instance.visibleOutlineColor);
-
         }
         public void SetCustomOLColor(bool target) 
         {
             customizeOLColor = target;
         }
-
         public void UpdateSmoothSpeed(float target)
         {
             smoothSpeed = target;
         }
-
         public void PlaySoundOnSetVisible() 
         {
             OnPlaySound?.Invoke("activate",marchObject.transform.position, AudioRolloffMode.Linear,0.5f,10);
