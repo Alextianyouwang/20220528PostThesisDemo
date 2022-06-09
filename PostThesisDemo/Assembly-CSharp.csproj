@@ -75,6 +75,7 @@
     <Compile Include="Assets\MainScripts\March\MarchObjectGroup.cs" />
     <Compile Include="Assets\Audio\Scripts\AudioManager.cs" />
     <Compile Include="Assets\ObjSpawner\ObjSpawnerBase.cs" />
+    <Compile Include="Assets\MainScripts\Events\PlayAreaManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shader\CGINC\DecodeDepthNormals.hlsl" />

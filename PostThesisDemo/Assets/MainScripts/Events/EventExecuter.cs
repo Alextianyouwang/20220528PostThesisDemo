@@ -15,6 +15,7 @@ public abstract class EventExecuter : MonoBehaviour
     public static Action<string, float> OnRotateObject;
     public static Action<string, string,float> OnRotateObjectLerp;
     public static Action<string, Vector3, AudioRolloffMode, float, int> OnPlaySoundSpacial;
+    public static Action<string> OnEnablePlayArea;
     public enum ObjectActivationState { activate, unchange, deactivate };
     [HideInInspector]
     public ObjectActivationState objectActivationState;

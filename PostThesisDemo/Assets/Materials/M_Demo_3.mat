@@ -176,12 +176,12 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _IndicatiorMultiplier: 0
-    - _InnerRadius: 19.999975
+    - _InnerRadius: 19.999973
     - _MAIN_LIGHT_CALCULATE_CASCADE: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Opacity: 0
-    - _OuterRadius: 50.000057
+    - _OuterRadius: 50.00005
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -209,7 +209,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Position: {r: 44.762817, g: 0.24648805, b: -46.85675, a: 0}
+    - _Position: {r: -45.84348, g: 0.24647255, b: -69.581924, a: 0}
     - _PositionFieldColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

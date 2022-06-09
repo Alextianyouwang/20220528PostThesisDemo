@@ -36,6 +36,7 @@ public class Scene_Demo : EventExecuter,
     public void StartScene() 
     {
         OnBGM?.Invoke("TheCity_0", 5f);
+        OnEnablePlayArea?.Invoke("Area_0");
         StartCoroutine(FormBoundary());
     }
     IEnumerator FormBoundary() 
@@ -173,6 +174,7 @@ public class Scene_Demo : EventExecuter,
     {
         if (eventName == "AfterAssembleNarwhal") 
         {
+            OnEnablePlayArea?.Invoke("Area_1");
             FindMarchObjectGroup("End_Grid_MarchGroup").jobActivate = true;
             FindMarchObjectGroup("End_FirstActionCubes_MarchGroup").jobActivate = true;
         }

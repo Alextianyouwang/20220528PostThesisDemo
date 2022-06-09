@@ -99,7 +99,7 @@ public static class MyEventsDispatcher
     public static List<MyEvent> eventList = new List<MyEvent>();
     public static MyEvent currentEvent;
 
-    public static MyEvent InitiateSelectedEvent(string name, float autoTriggerTimer, bool oneTimeActivation)
+    public static MyEvent InitiateSelectedEvent(string name, float autoExitTimer, bool oneTimeActivation)
     {
         OnEnterEvent?.Invoke(name);
         MyEvent selectedEvent = eventList.Find(x => x.name == name);
@@ -107,7 +107,7 @@ public static class MyEventsDispatcher
             return null;
         currentEvent = selectedEvent;
         selectedEvent.isInprogress = true;
-        LoadCurrentEventAction(selectedEvent, autoTriggerTimer);
+        LoadCurrentEventAction(selectedEvent, autoExitTimer);
         if (oneTimeActivation)
             selectedEvent.hasActivated = true;
         return selectedEvent;
