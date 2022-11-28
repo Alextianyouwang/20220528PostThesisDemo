@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Demo_0
+  m_Name: M_Demo_1
   m_Shader: {fileID: -6465566751694194690, guid: ff0615dfcf4b4e94c9d8c3d3160a70dc, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -58,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - T_HighlightRamp_Tex:
-        m_Texture: {fileID: 2800000, guid: 86275d9963b738249be774f56e09f320, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9319a5e926628e418803a53ba208773, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -176,12 +176,12 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _IndicatiorMultiplier: 0
-    - _InnerRadius: 19.999973
+    - _InnerRadius: 19.99996
     - _MAIN_LIGHT_CALCULATE_CASCADE: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Opacity: 0
-    - _OuterRadius: 50.00005
+    - _OuterRadius: 50.00008
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -198,7 +198,7 @@ Material:
     - BaseColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
     - Color_4c0946dc1efe49889a3c4fc7f0f635cb: {r: 0.16598773, g: 0.8582781, b: 0.7600216, a: 1}
     - GridColor: {r: 0, g: 0, b: 0, a: 0}
-    - OL_Color: {r: 0, g: 0, b: 0, a: 1}
+    - OL_Color: {r: 1.3039844, g: 1.1954923, b: 0, a: 1}
     - PBR_Emission: {r: 0, g: 0, b: 0, a: 0}
     - ScanPos0: {r: 0, g: 0, b: 0, a: 0}
     - ScanPos1: {r: 0, g: 0, b: 0, a: 0}
@@ -209,7 +209,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Position: {r: -45.84348, g: 0.24647255, b: -69.581924, a: 0}
+    - _Position: {r: 27.758211, g: 0.24641001, b: -40.403385, a: 0}
     - _PositionFieldColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
